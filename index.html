@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mall of Africa Restaurant – Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0D0D0B;
+  --surface:#161613;
+  --card:#1C1C19;
+  --gold:#C9A96E;
+  --gold2:#E8C98A;
+  --text:#F2EDE4;
+  --muted:#8A8479;
+  --border:rgba(201,169,110,0.15);
+  --red:#C0441A;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+
+/* HERO */
+.hero{position:relative;text-align:center;padding:3.5rem 1rem 2.5rem;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,169,110,0.09) 0%, transparent 70%);pointer-events:none}
+.hero-tag{display:inline-block;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);border:0.5px solid var(--border);padding:4px 16px;border-radius:20px;margin-bottom:1rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:42px;font-weight:600;line-height:1.1;color:var(--text)}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:14px;color:var(--muted);margin-top:10px;letter-spacing:0.05em}
+.hero-info{display:flex;justify-content:center;gap:2rem;margin-top:1.4rem;flex-wrap:wrap}
+.hero-info a,.hero-info span{font-size:12px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s}
+.hero-info a:hover{color:var(--gold)}
+.hero-info svg{width:13px;height:13px;opacity:.6;flex-shrink:0}
+.divider-line{display:flex;align-items:center;gap:12px;margin:2rem auto 0;max-width:300px}
+.divider-line::before,.divider-line::after{content:'';flex:1;height:0.5px;background:var(--border)}
+.divider-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0}
+
+/* STICKY NAV */
+.nav-wrap{position:sticky;top:0;z-index:100;background:rgba(13,13,11,0.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:0.85rem 1rem;border-bottom:0.5px solid var(--border)}
+.nav-scroll{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:2px;max-width:760px;margin:0 auto}
+.nav-scroll::-webkit-scrollbar{display:none}
+.nb{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:7px 15px;border-radius:20px;border:0.5px solid rgba(201,169,110,0.2);background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.nb:hover{color:var(--gold);border-color:rgba(201,169,110,0.4)}
+.nb.active{background:var(--gold);color:#0D0D0B;border-color:var(--gold);font-weight:500}
+
+/* CONTENT */
+.content{padding:1.5rem 1rem 4rem;max-width:760px;margin:0 auto}
+
+/* SECTION HEADER */
+.sec-head{display:flex;align-items:baseline;gap:12px;margin:2.5rem 0 0.5rem}
+.sec-head:first-child{margin-top:0.5rem}
+.sec-head h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--text)}
+.sec-count{font-size:11px;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase}
+.sec-note{font-size:12px;color:var(--muted);margin-bottom:1.1rem;font-style:italic}
+
+/* PHOTO GRID */
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:0.5rem}
+.photo-card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;transition:transform 0.25s,border-color 0.25s}
+.photo-card:hover{transform:translateY(-4px);border-color:rgba(201,169,110,0.4)}
+.photo-card img{width:100%;height:140px;object-fit:cover;display:block;filter:brightness(0.88);transition:filter 0.25s}
+.photo-card:hover img{filter:brightness(1)}
+.no-img{width:100%;height:90px;background:linear-gradient(135deg,#1C1C19,#252520);display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--muted)}
+.pc-body{padding:11px 13px 13px}
+.pc-top{display:flex;justify-content:space-between;align-items:start;gap:8px;margin-bottom:5px}
+.pc-name{font-size:13px;font-weight:500;color:var(--text);line-height:1.3}
+.pc-price{font-size:15px;font-weight:500;color:var(--gold);white-space:nowrap}
+.pc-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:7px}
+.pc-badge{display:inline-block;font-size:9px;letter-spacing:0.09em;text-transform:uppercase;background:rgba(201,169,110,0.1);color:var(--gold);padding:2px 9px;border-radius:20px;border:0.5px solid rgba(201,169,110,0.25)}
+
+/* LIST GRID */
+.list-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:9px;margin-bottom:0.5rem}
+.list-card{background:var(--card);border:0.5px solid var(--border);border-radius:11px;padding:12px 14px;transition:border-color 0.2s}
+.list-card:hover{border-color:rgba(201,169,110,0.3)}
+.lc-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px}
+.lc-name{font-size:13px;font-weight:500;color:var(--text);line-height:1.4}
+.lc-price{font-size:13px;color:var(--gold);white-space:nowrap;font-weight:500}
+.lc-desc{font-size:11px;color:var(--muted);line-height:1.55}
+.lc-badge{display:inline-block;margin-top:6px;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;background:rgba(192,68,26,0.12);color:#E07050;padding:2px 8px;border-radius:20px;border:0.5px solid rgba(192,68,26,0.2)}
+
+/* SPECIALS */
+.special-card{background:linear-gradient(135deg,rgba(201,169,110,0.08),rgba(201,169,110,0.02));border:0.5px solid rgba(201,169,110,0.3);border-radius:14px;padding:16px 18px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:start;gap:16px;transition:border-color 0.2s}
+.special-card:hover{border-color:rgba(201,169,110,0.5)}
+.sc-left{flex:1}
+.sc-name{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);margin-bottom:5px;line-height:1.3}
+.sc-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.sc-right{text-align:right;flex-shrink:0}
+.sc-price{font-size:18px;font-weight:500;color:var(--gold);white-space:nowrap}
+.sc-tag{display:inline-block;font-size:9px;text-transform:uppercase;letter-spacing:0.1em;background:var(--gold);color:#0D0D0B;padding:2px 9px;border-radius:20px;margin-bottom:8px;font-weight:500}
+
+/* FOOTER */
+.menu-footer{text-align:center;padding:2.5rem 1rem 3rem;border-top:0.5px solid var(--border);margin-top:1rem}
+.menu-footer .basbaas{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:15px;margin-bottom:8px}
+.menu-footer p{font-size:12px;color:var(--muted);line-height:2}
+.menu-footer a{color:var(--muted);text-decoration:none;transition:color 0.2s}
+.menu-footer a:hover{color:var(--gold)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.sec-block{animation:fadeUp 0.4s ease both}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  .hero h1{font-size:30px}
+  .photo-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .list-grid{grid-template-columns:1fr}
+  .special-card{flex-direction:column;gap:8px}
+  .sc-right{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">SeaTac, Washington</div>
+  <h1>Mall of <em>Africa</em></h1>
+  <p class="hero-sub">Authentic East African &amp; Somali Cuisine</p>
+  <div class="hero-info">
+    <a href="tel:2064293785">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.06 1.24 2 2 0 012 .06h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+      (206) 429-3785
+    </a>
+    <span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      21027 International Blvd, SeaTac WA 98198
+    </span>
+  </div>
+  <div class="divider-line"><div class="divider-dot"></div></div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav-scroll" id="nav">
+    <button class="nb active" onclick="show('all',this)">All</button>
+    <button class="nb" onclick="show('appetizers',this)">Appetizers</button>
+    <button class="nb" onclick="show('rice',this)">Rice</button>
+    <button class="nb" onclick="show('ugali',this)">Ugali</button>
+    <button class="nb" onclick="show('pasta',this)">Pasta</button>
+    <button class="nb" onclick="show('injera',this)">Injera</button>
+    <button class="nb" onclick="show('fastfood',this)">Fast Food</button>
+    <button class="nb" onclick="show('drinks',this)">Drinks</button>
+    <button class="nb" onclick="show('specials',this)">✦ Specials</button>
+  </div>
+</div>
+
+<div class="content" id="content"></div>
+
+<div class="menu-footer">
+  <p class="basbaas">Add basbaas to any dish for a burst of Somali heat</p>
+  <p><a href="tel:2064293785">(206) 429-3785</a></p>
+  <p>21027 International Blvd, SeaTac, WA 98198</p>
+  <p style="margin-top:1rem;font-size:11px;opacity:0.5">© Mall of Africa Restaurant</p>
+</div>
+
+<script>
+const data = [
+  {id:'appetizers',label:'Appetizers',note:'Perfect starters to begin your journey',type:'list',items:[
+    {name:'Sambuusa (2 pieces)',price:'$4.00',desc:'Crispy pastries filled with spiced minced meat, lentils, or vegetables. Served with tangy tamarind sauce.',badge:''},
+    {name:'Mandazi',price:'$2.00',desc:'Fluffy Somali fried bread, golden and light — perfect for dipping or enjoying on its own.',badge:''},
+    {name:'Chapati',price:'$3.00',desc:'Soft, flaky flatbread made with a touch of ghee. A beloved staple of Somali cuisine.',badge:''},
+  ]},
+  {id:'rice',label:'Rice',note:'Pair any dish with basbaas for added heat',type:'photo',items:[
+    {name:'Chicken Steak',price:'$16.00',desc:'Fragrant basmati rice with stir-fried chicken in xawaash and fresh herbs.',badge:'',img:'images/Rice_With_Chicken_Suqaar.jpg'},
+    {name:'Beef Steak',price:'$17.00',desc:'Aromatic basmati rice paired with beef stir-fry cooked with Somali spices.',badge:'',img:'images/Spagheti_With_Beef_Steak.jpg'},
+    {name:'Goat Meat Rice',price:'$20.00',desc:'Tender goat simmered in xawaash broth, served over fragrant basmati rice.',badge:'Popular',img:'images/Rice_with_Goat_Meat_.jpg'},
+    {name:'Lamb Shank Rice',price:'$20.00',desc:'Slow-cooked lamb shank in rich spices served over spiced basmati rice.',badge:"Chef's Pick",img:'images/Ugali_With_Lamp_Shank.jpg'},
+    {name:'Rice with Beef Suqaar',price:'$15.00',desc:'Fragrant basmati rice with cubed beef cooked in xawaash and fresh herbs.',badge:'',img:'images/Rice_w__Busteeki.jpg'},
+    {name:'Rice with Chicken Suqaar',price:'$14.00',desc:'Fragrant basmati rice with cubed chicken in xawaash and fresh herbs.',badge:'',img:'images/Chicken_Suqaar_w__Malwah.jpg'},
+    {name:'Vegetarian Rice',price:'$10.00',desc:'Basmati rice with sautéed seasonal vegetables, lentils, and a hint of turmeric.',badge:'Veg',img:''},
+  ]},
+  {id:'ugali',label:'Ugali',note:'Elevate the flavor with a side of basbaas',type:'list',items:[
+    {name:'Ugali with Chicken',price:'$14.00',desc:'Soft fluffy ugali served with stir-fried chicken in xawaash.',badge:''},
+    {name:'Ugali with Beef',price:'$15.00',desc:'Ugali paired with tender beef stir-fry seasoned with Somali spices.',badge:''},
+    {name:'Ugali with Goat Meat',price:'$20.00',desc:'Fluffy ugali with goat meat simmered in a rich spiced broth.',badge:''},
+    {name:'Ugali with Lamb Shank',price:'$20.00',desc:'Ugali paired with slow-cooked lamb shank and a rich aromatic sauce.',badge:''},
+    {name:'Ugali with Vegetables',price:'$10.00',desc:'Ugali with lentils and sautéed seasonal vegetables, seasoned with turmeric and cumin.',badge:'Veg'},
+    {name:'Ugali with Salmon',price:'$15.00',desc:'Soft fluffy ugali served with fried salmon cooked in xawaash.',badge:''},
+  ]},
+  {id:'pasta',label:'Pasta',note:'Elevate the flavor with a side of basbaas',type:'list',items:[
+    {name:'Goat Pasta',price:'$20.00',desc:'Tender goat simmered in xawaash broth, served with pasta.',badge:''},
+    {name:'Lamb Pasta',price:'$20.00',desc:'Slow-cooked lamb shank in rich spices, served over spiced pasta.',badge:''},
+    {name:'Fish Pasta',price:'$15.00',desc:'Salmon prepared in rich Somali spices, served with pasta.',badge:''},
+    {name:'Vegetable Pasta',price:'$10.00',desc:'Seasonal vegetables sautéed with Somali spices over pasta.',badge:'Veg'},
+    {name:'Pasta with Beef Suqaar',price:'$15.00',desc:'Tender beef in xawaash, paired with pasta and savory tomato sauce.',badge:''},
+    {name:'Pasta with Chicken Suqaar',price:'$14.00',desc:'Stir-fried chicken with Somali spices over pasta in a spiced tomato sauce.',badge:''},
+  ]},
+  {id:'injera',label:'Injera',note:'Traditional Ethiopian-style spongy flatbread',type:'photo',items:[
+    {name:'Injera with Lamb',price:'$23.99',desc:'Traditional injera served with lamb cooked in a Somali-spiced sauce.',badge:'',img:'images/chick_suqaar_with_Somali_Anjeero.jpg'},
+    {name:'Injera with Beef Suqaar',price:'$21.99',desc:'Traditional injera served with beef cooked in a Somali-spiced sauce.',badge:'',img:''},
+    {name:'Injera with Chicken Suqaar',price:'$20.99',desc:'Traditional injera served with chicken cooked in a Somali-spiced sauce.',badge:'Popular',img:'images/Chicken_Suqaar_w__Malwah.jpg'},
+    {name:'Injera with Goat Meat',price:'$24.99',desc:'Traditional injera served with goat cooked in a Somali-spiced sauce.',badge:'',img:''},
+    {name:'Injera with Vegetables',price:'$15.99',desc:'Injera with lentils, sautéed greens, and seasonal vegetables in xawaash.',badge:'Veg',img:''},
+  ]},
+  {id:'fastfood',label:'Fast Food',note:'Each combo includes fries and a drink',type:'list',items:[
+    {name:'Beef Burger Combo',price:'$10.00',desc:'Juicy Somali-spiced beef patty with lettuce, tomato & sauce on a toasted bun. With fries & drink.',badge:'Combo'},
+    {name:'Chicken Burger Combo',price:'$10.00',desc:'Grilled Somali-spiced chicken burger with lettuce, tomato & sauce. With fries & drink.',badge:'Combo'},
+    {name:'Chicken/Beef Wrap Combo',price:'$12.00',desc:'Grilled chicken in chapati with fresh vegetables and tangy sauce. With fries & drink.',badge:'Combo'},
+    {name:'Beef Burger Only',price:'$8.00',desc:'Juicy Somali-spiced beef patty on a toasted bun.',badge:''},
+    {name:'Chicken Burger Only',price:'$7.00',desc:'Grilled Somali-spiced chicken on a toasted bun.',badge:''},
+    {name:'Philly Cheese Combo',price:'$12.00',desc:'Seasoned beef with sautéed veggies and melted cheese in flatbread. With fries & drink.',badge:'Combo'},
+    {name:'Philly Cheese Only',price:'$10.00',desc:'Seasoned beef, sautéed veggies, melted cheese in flatbread.',badge:''},
+    {name:'Chicken Nuggets (6 pcs)',price:'$6.00',desc:'Crispy golden-fried chicken tenders with your choice of dipping sauce.',badge:''},
+    {name:'Fries',price:'$3.00',desc:'Crispy fries tossed in Somali spices, served with basbaas.',badge:''},
+    {name:'Spicy Wings',price:'$2.00/pc',desc:'Chicken wings coated in a flavorful Somali hot sauce glaze.',badge:'Spicy'},
+  ]},
+  {id:'drinks',label:'Beverages & Smoothies',note:'From traditional Somali teas to fresh blends',type:'list',items:[
+    {name:'Shaah Somali (Spiced Tea)',price:'$2–$4',desc:'Rich aromatic black tea brewed with cardamom, cinnamon, cloves, and ginger. With or without milk.',badge:''},
+    {name:'Somali Coffee',price:'$3–$6',desc:'Bold coffee brewed with cardamom and cloves, offering a sweet and spiced finish.',badge:''},
+    {name:'Soft Drinks',price:'$2.00',desc:'Vimto · Mango Juice · Tamarind Juice · Bottled Water · Soda',badge:''},
+    {name:'Mango Smoothie',price:'$5.00',desc:'Fresh mango blended smooth and cold.',badge:''},
+    {name:'Mixed Berry Smoothie',price:'$5.00',desc:'A vibrant blend of fresh mixed berries.',badge:''},
+    {name:'Mango Almond / Yogurt',price:'$7.00',desc:'Mixed mango blended with almond milk or yogurt.',badge:''},
+    {name:'Mixed Berry & Banana Yogurt',price:'$7.00',desc:'Mixed berry and banana blended with creamy yogurt.',badge:''},
+  ]},
+  {id:'specials',label:'Specials',note:'Our most celebrated dishes — best shared',type:'special',items:[
+    {name:'Kati Kati – Beef, Chicken or Salmon',price:'$15.00',desc:'Chapati simmered with tender meat in a blend of Somali spices, served in a rich aromatic sauce.',tag:'House Special'},
+    {name:'Kati Kati with Chicken Suqaar',price:'$15.00',desc:'Kati kati served alongside fragrant, spiced chicken suqaar.',tag:'House Special'},
+    {name:'Kati Kati with Beef Suqaar',price:'$15.00',desc:'Kati kati served alongside slow-cooked, spiced beef suqaar.',tag:'House Special'},
+    {name:'Sports Rice – Goat or Lamb Shank',price:'$40.00',desc:'Aromatic basmati rice or pasta served family-style with your choice of goat or lamb shank.',tag:'Family Feast'},
+    {name:'Sports with 3 Meat Options',price:'$42.99',desc:'Choice of three meats: chicken, beef, fish, lamb or goat. Served with rice or pasta for the whole family.',tag:'Family Feast'},
+  ]},
+];
+
+function buildPhotoCard(item){
+  return `<div class="photo-card">
+    ${item.img
+      ? `<img src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.parentElement.querySelector('.no-img-fallback').style.display='flex';this.style.display='none'"><div class="no-img no-img-fallback" style="display:none">🍽</div>`
+      : `<div class="no-img">🍽</div>`}
+    <div class="pc-body">
+      <div class="pc-top"><span class="pc-name">${item.name}</span><span class="pc-price">${item.price}</span></div>
+      <div class="pc-desc">${item.desc}</div>
+      ${item.badge ? `<span class="pc-badge">${item.badge}</span>` : ''}
+    </div>
+  </div>`;
+}
+
+function buildListCard(item){
+  return `<div class="list-card">
+    <div class="lc-top"><span class="lc-name">${item.name}</span><span class="lc-price">${item.price}</span></div>
+    <div class="lc-desc">${item.desc}</div>
+    ${item.badge ? `<span class="lc-badge">${item.badge}</span>` : ''}
+  </div>`;
+}
+
+function buildSpecial(item){
+  return `<div class="special-card">
+    <div class="sc-left">
+      <span class="sc-tag">${item.tag}</span>
+      <div class="sc-name">${item.name}</div>
+      <div class="sc-desc">${item.desc}</div>
+    </div>
+    <div class="sc-right"><div class="sc-price">${item.price}</div></div>
+  </div>`;
+}
+
+function show(id, btn){
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const el = document.getElementById('content');
+  el.innerHTML = '';
+  const secs = id === 'all' ? data : data.filter(s => s.id === id);
+  secs.forEach((sec, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'sec-block';
+    wrap.style.animationDelay = (i * 0.06) + 's';
+    let html = `<div class="sec-head"><h2>${sec.label}</h2><span class="sec-count">${sec.items.length} items</span></div>`;
+    if(sec.note) html += `<p class="sec-note">${sec.note}</p>`;
+    if(sec.type === 'special'){
+      html += sec.items.map(buildSpecial).join('');
+    } else if(sec.type === 'photo'){
+      html += `<div class="photo-grid">${sec.items.map(buildPhotoCard).join('')}</div>`;
+    } else {
+      html += `<div class="list-grid">${sec.items.map(buildListCard).join('')}</div>`;
+    }
+    wrap.innerHTML = html;
+    el.appendChild(wrap);
+  });
+}
+
+show('all', document.querySelector('.nb.active'));
+</script>
+</body>
+</html>
